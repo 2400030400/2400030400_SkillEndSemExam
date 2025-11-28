@@ -1,0 +1,39 @@
+import React, { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const students = [
+  { name: "Riya Sharma", dob: "2006-11-28" },
+  { name: "Aman Verma", dob: "2007-05-03" },
+  { name: "Sneha Rao", dob: "2006-11-28" },
+  { name: "Karan Singh", dob: "2005-01-12" }
+];
+
+function App() {
+  const checkBirthdays = () => {
+    const today = new Date();
+    students.forEach(student => {
+      const dob = new Date(student.dob);
+
+      if (
+        today.getDate() === dob.getDate() &&
+        today.getMonth() === dob.getMonth()
+      ) {
+        toast.success(`🎉 It's ${student.name}'s Birthday Today!`);
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkBirthdays();
+  }, []);
+
+  return (
+    <div>
+      <h2>Student Birthday Reminder</h2>
+      <ToastContainer position="top-right" autoClose={3000} />
+    </div>
+  );
+}
+
+export default App;
